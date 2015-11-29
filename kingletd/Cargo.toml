@@ -1,0 +1,6 @@
+[package]
+name = "kingletd"
+version = "0.1.0"
+authors = ["Pyfisch <pyfisch@gmail.com>"]
+
+[dependencies]
