@@ -1,0 +1,9 @@
+digraph Client {
+    // Simplified graph. Does not contain error cases.
+    "Initial" -> "ReadHeaders" -> "Parsed" -> "KeepAlive" -> "ReadHeaders"
+    "ReadHeaders" -> "ReadFixedSize" -> "ReadFixedSize" ->"Parsed"
+    "ReadHeaders" -> "ReadChunked" -> "ReadChunked" -> "Parsed"
+    "ReadChunked" -> "ReadTrailers" -> "Parsed"
+    {rank = same; "Initial"; "KeepAlive";}
+    {rank = same; "ReadFixedSize"; "ReadChunked";}
+}

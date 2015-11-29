@@ -2,6 +2,8 @@
 name = "kinglet"
 version = "0.1.0"
 authors = ["Pyfisch <pyfisch@gmail.com>"]
+license = "MIT"
+readme = "README.md"
 
 [dependencies]
 kingletd = { path = "kingletd"}
