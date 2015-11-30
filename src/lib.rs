@@ -1,6 +1,5 @@
-extern crate kingletd;
-extern crate kingletp;
+extern crate kingletd as kingletd_crate;
+extern crate kingletp as kingletp_crate;
 
-#[test]
-fn it_works() {
-}
+pub use kingletd_crate as kingletd;
+pub use kingletp_crate as kingletp;

@@ -4,3 +4,7 @@ version = "0.1.0"
 authors = ["Pyfisch <pyfisch@gmail.com>"]
 
 [dependencies]
+mio = "*"
+rotor = { git = "git://github.com/pyfisch/rotor", rev="e96a1fd677abd308caf97eda59c56a643e398c4a" }
+httparse = "*"
+kingletp = { path = "../kingletp" }
