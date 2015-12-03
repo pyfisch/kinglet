@@ -6,5 +6,12 @@ license = "MIT"
 readme = "README.md"
 
 [dependencies]
-kingletd = { path = "kingletd"}
-kingletp = { path = "kingletp"}
+httparse = "*"
+hyper = "*"
+mio = "*"
+netbuf ={ git = "git://github.com/pyfisch/netbuf", rev = "5167b36780370724" }
+rotor = { git = "git://github.com/tailhook/rotor" }
+unicase = "*"
+url = "*"
+time = "*"
+multimap = { git = "git://github.com/havarnov/multimap" }

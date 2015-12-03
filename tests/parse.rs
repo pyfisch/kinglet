@@ -1,12 +1,12 @@
 extern crate netbuf;
 extern crate rotor;
-extern crate kingletd;
+extern crate kinglet;
 
 use netbuf::Buf;
 use rotor::async::Async;
 use rotor::transports::stream::{Transport, Protocol};
-use kingletd::{Request, Response, Url, HttpVersion, Method, Message};
-use kingletd::http1::{Client, Handler};
+use kinglet::{Request, Response, Url, HttpVersion, Method, Message};
+use kinglet::http1::{Client, Handler};
 
 #[test]
 fn parse_get_request() {

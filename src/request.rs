@@ -1,6 +1,6 @@
 use std::str;
 
-use url::Url;
+use url::{ParseResult, Url};
 
 use Error::{InvalidVersion, InvalidMethod, InvalidMessage};
 use Headers;
@@ -8,7 +8,6 @@ use HttpVersion::{self, Http09, Http10, Http11, Http20};
 use Method;
 use Message;
 use httparse::{self, Header};
-use utils::url_from_http;
 
 #[derive(Debug, PartialEq)]
 pub struct Request {
@@ -52,6 +51,9 @@ impl Request {
 
     pub fn request_url(&self) -> ::Result<Url> {
         // TODO: Support `*` paths
+        fn url_from_http(scheme: &str, authority: &str, path: &str) -> ParseResult<Url> {
+            Url::parse(&format!("{}://{}{}", scheme, authority, path)[..])
+        }
         match self.version {
             Http09 | Http10 => url_from_http(&self.scheme[..], "0.0.0.0", &self.path[..]),
             Http11 => {

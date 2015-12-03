@@ -2,6 +2,7 @@ use std::str;
 use std::str::FromStr;
 use std::ascii::AsciiExt;
 
+use IterListHeader;
 use Error::{ForbiddenHeader, MissingHeader};
 
 pub trait Message {
@@ -41,51 +42,5 @@ pub trait Message {
             }
         }
         false
-    }
-}
-
-pub struct IterListHeader<'a> {
-    values: &'a Vec<Vec<u8>>,
-    line: usize,
-    column: usize,
-}
-
-impl <'a>IterListHeader<'a> {
-    fn new(values: &Vec<Vec<u8>>) -> IterListHeader {
-        IterListHeader {
-            values: values,
-            line: 0,
-            column: 0,
-        }
-    }
-}
-
-impl <'a>Iterator for IterListHeader<'a> {
-    type Item = &'a [u8];
-    fn next(&mut self) -> Option<&'a [u8]> {
-        for i in self.line..self.values.len() {
-            let mut start = true;
-            let value = &self.values[i];
-            for j in self.column..value.len() {
-                if start && (value[j] == b' ' || value[j] == b'\t') {
-                    self.column = j + 1;
-                } else if start {
-                    start = false;
-                }
-                if value[j] == b',' {
-                    let val = &value[self.column..j];
-                    self.column = j + 1;
-                    return Some(val);
-                }
-            }
-            if self.column < value.len() {
-                let val = &value[self.column..];
-                self.column = value.len();
-                return Some(val);
-            }
-            self.line += 1;
-            self.column = 0;
-        }
-        None
     }
 }

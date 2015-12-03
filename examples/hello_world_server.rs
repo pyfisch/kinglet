@@ -1,6 +1,6 @@
-extern crate kingletd;
+extern crate kinglet;
 
-use kingletd::{Handler, HttpServer, Request, Response, Url, Message, TcpListener, EventLoop, EventHandler};
+use kinglet::{Handler, HttpServer, Request, Response, Url, Message, TcpListener, EventLoop, EventHandler};
 
 struct Context {
     counter: usize,

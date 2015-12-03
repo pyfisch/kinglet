@@ -8,7 +8,9 @@ use rotor::transports::StreamSocket;
 use rotor::buffer_util::find_substr;
 use rotor::async::Async;
 use httparse;
-use kingletp::{Message, Request, Response};
+use Message;
+use Request;
+use Response;
 
 
 /// Note httparse requires we preallocate array of this size so be wise
