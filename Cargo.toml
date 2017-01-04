@@ -1,17 +1,12 @@
 [package]
 name = "kinglet"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Pyfisch <pyfisch@gmail.com>"]
-license = "MIT"
-readme = "README.md"
 
 [dependencies]
-httparse = "*"
-hyper = "*"
-mio = "*"
-netbuf ={ git = "git://github.com/pyfisch/netbuf", rev = "5167b36780370724" }
-rotor = { git = "git://github.com/tailhook/rotor" }
-unicase = "*"
-url = "*"
-time = "*"
-multimap = { git = "git://github.com/havarnov/multimap" }
+httparse = "1.2.1"
+httpdate = "0.2.0"
+httptypes = { git = "https://github.com/pyfisch/httptypes" }
+tokio-core = "0.1"
+tokio-proto = { git = "https://github.com/tokio-rs/tokio-proto" }
+tokio-service = { git = "https://github.com/tokio-rs/tokio-service" }
