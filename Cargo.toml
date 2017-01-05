@@ -4,6 +4,7 @@ version = "0.2.0"
 authors = ["Pyfisch <pyfisch@gmail.com>"]
 
 [dependencies]
+futures = "0.1.7"
 httparse = "1.2.1"
 httpdate = "0.2.0"
 httptypes = { git = "https://github.com/pyfisch/httptypes" }
