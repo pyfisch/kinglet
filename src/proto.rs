@@ -1,6 +1,6 @@
 use std::io;
 
-use tokio_core::io::Io;
+use tokio_core::net::TcpStream;
 use tokio_proto::streaming::pipeline::ServerProto;
 
 use {Request, Response, Chunk, Http1Transport};
@@ -9,16 +9,16 @@ use {Request, Response, Chunk, Http1Transport};
 // opaque for future extension
 pub struct Http1(());
 
-impl<T: Io + 'static> ServerProto<T> for Http1 {
+impl ServerProto<TcpStream> for Http1 {
     type Request = Request;
     type RequestBody = Chunk;
     type Response = Response;
     type ResponseBody = Chunk;
     type Error = io::Error;
-    type Transport = Http1Transport<T>;
+    type Transport = Http1Transport;
     type BindTransport = Result<Self::Transport, io::Error>;
-    
-    fn bind_transport(&self, _io: T) -> Self::BindTransport {
-        unimplemented!();
+
+    fn bind_transport(&self, io: TcpStream) -> Self::BindTransport {
+        Ok(Http1Transport::new(io))
     }
 }

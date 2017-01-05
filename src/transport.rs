@@ -1,25 +1,40 @@
 use std::io;
 
 use futures::{Poll, StartSend};
-use futures::stream::Stream;
-use futures::sink::Sink;
+use futures::{Stream, Sink};
+use httparse;
+use tokio_core::net::TcpStream;
 use tokio_proto::streaming::pipeline::{Frame, Transport};
 
 use {Request, Response, Chunk};
 
-// PhantomData is a mere placeholder until I know what to do with T
-pub struct Http1Transport<T>(::std::marker::PhantomData<T>);
+pub struct Http1Transport {
+    io: TcpStream,
+}
 
-impl<T> Stream for Http1Transport<T> {
+impl Http1Transport {
+    pub fn new(io: TcpStream) -> Http1Transport {
+        Http1Transport {
+            io: io,
+        }
+    }
+}
+
+impl Stream for Http1Transport {
     type Item = Frame<Request, Chunk, io::Error>;
     type Error = io::Error;
 
     fn poll(&mut self) -> Poll<Option<Self::Item>, Self::Error> {
+        let mut headers = [httparse::EMPTY_HEADER; 64];
+        let mut raw_req = httparse::Request::new(&mut headers);
+        // Read the request header from the stream.
+        // Transform the Request
+        // Return an Item.
         unimplemented!();
     }
 }
 
-impl<T> Sink for Http1Transport<T> {
+impl Sink for Http1Transport {
     type SinkItem = Frame<Response, Chunk, io::Error>;
     type SinkError = io::Error;
     fn start_send(&mut self,
@@ -33,4 +48,4 @@ impl<T> Sink for Http1Transport<T> {
     }
 }
 
-impl<T: 'static> Transport for Http1Transport<T> {}
+impl Transport for Http1Transport {}
